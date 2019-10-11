@@ -1,5 +1,6 @@
 //import testModel from './mongodb/model';
-const testModel = require('./mongodb/model')
+const testModel = require('./mongodb/model');
+const incorrectModal = require('./mongodb/incorrect.model');
 const Koa = require('koa');
 const app = new Koa();
 const router = require('koa-router')();
@@ -36,6 +37,7 @@ router.get('/remove', async (ctx, next) => {
 });
 router.post('/report', async (ctx, next) => {
     var type = ctx.request.body.type || '';
+    const res = await incorrectModal.add(ctx.request.body)
     ctx.response.body = `<h1>${type}</h1>`;
 })
 app.use(router.routes());
