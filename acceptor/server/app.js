@@ -19,12 +19,20 @@ router.get('/', async (ctx, next) => {
     ctx.response.body = '<h1>Index</h1>';
 });
 router.get('/testadd', async (ctx, next) => {
-    testModel.add({ name:'1232312' });
+    let name = '123123123'
+    if(ctx.querystring){
+        name = ctx.querystring.split('name=')[1];
+    }
+    testModel.add({ name});
     ctx.response.body = '<h1>testadd</h1>';
 });
 router.get('/testfind', async (ctx, next) => {
     const res = await testModel.find();
     ctx.response.body = '<h1>testfind</h1>';
+});
+router.get('/remove', async (ctx, next) => {
+    const res = await testModel.remove();
+    ctx.response.body = '<h1>remove</h1>';
 });
 router.post('/report', async (ctx, next) => {
     var type = ctx.request.body.type || '';
