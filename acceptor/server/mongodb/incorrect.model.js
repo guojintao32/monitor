@@ -23,15 +23,18 @@ const incorrectModal = {
     return result
   },
   async find(query){
-    await testCol.find(query, (err,data)=> {
-      console.log(data)
-      if (err) {
-        logger.error(err)
-      }
+    result = await new Promise(resolve => {
+      IncorrectCol.find(query, (err,data)=> {
+        if (err) {
+          logger.error(err)
+        }
+        resolve(data)
+      });
     });
+    return result
   },
   async remove(query){
-    await testCol.remove(query, (err,data)=> {
+    await IncorrectCol.remove(query, (err,data)=> {
       console.log(data)
       if (err) {
         logger.error(err)

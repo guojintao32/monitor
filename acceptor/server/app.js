@@ -27,6 +27,11 @@ router.get('/testadd', async (ctx, next) => {
     testModel.add({ name});
     ctx.response.body = '<h1>testadd</h1>';
 });
+//从数据库获取所有错误列表
+router.get('/incorrect/list',async(ctx)=>{
+    const res = await incorrectModal.find(ctx.query);
+    ctx.response.body = res;
+})
 router.get('/testfind', async (ctx, next) => {
     const res = await testModel.find();
     ctx.response.body = '<h1>testfind</h1>';
@@ -38,7 +43,7 @@ router.get('/remove', async (ctx, next) => {
 router.post('/report', async (ctx, next) => {
     var type = ctx.request.body.type || '';
     const res = await incorrectModal.add(ctx.request.body)
-    ctx.response.body = `<h1>${type}</h1>`;
+    ctx.response.body = `提交成功！`;
 })
 app.use(router.routes());
 
