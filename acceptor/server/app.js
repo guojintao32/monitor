@@ -5,6 +5,7 @@ const Koa = require('koa');
 const app = new Koa();
 const router = require('koa-router')();
 const koaBody = require('koa-bodyparser');
+const IndexPage = require('./page/index');
 app.use(async (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
@@ -17,7 +18,8 @@ app.use(async (ctx, next) => {
 });
 app.use(koaBody());
 router.get('/', async (ctx, next) => {
-    ctx.response.body = '<h1>Index</h1>';
+    const indexPage = await IndexPage().catch(e=>console.log(e));
+    ctx.response.body = indexPage;
 });
 router.get('/testadd', async (ctx, next) => {
     let name = '123123123'

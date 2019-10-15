@@ -13,7 +13,9 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "log4js": "^5.2.2",
-    "mongoose": "^5.7.4"
+    "mongoose": "^5.7.4",
+    "vue": "^2.6.10",
+    "vue-server-renderer": "^2.6.10"
   },
   "devDependencies": {}
 }
