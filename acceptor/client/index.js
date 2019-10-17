@@ -1,9 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import axios from 'axios'
+//iview
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
+//v-charts
+import VeHistogram from 'v-charts/lib/histogram.common';
+import VeMap from 'v-charts/lib/map.common';
 
+[VeHistogram, VeMap].forEach(comp => {
+  Vue.component(comp.name, comp);
+});
+Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
 Vue.use(ViewUI);
 

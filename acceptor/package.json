@@ -11,11 +11,15 @@
   "author": "guo",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
+    "echarts": "^4.4.0",
     "koa": "^2.8.2",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "log4js": "^5.2.2",
+    "moment": "^2.24.0",
     "mongoose": "^5.7.4",
+    "v-charts": "^1.19.0",
     "view-design": "^4.0.1",
     "vue": "^2.6.10",
     "vue-server-renderer": "^2.6.10"

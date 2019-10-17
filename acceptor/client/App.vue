@@ -24,7 +24,7 @@
             </div>
           </Menu>
         </Header>
-        <Content :style="{margin: '88px 20px 0', background: '#fff', minHeight: '500px'}">
+        <Content :style="{margin: '88px 20px 0', background: '#fff', minHeight: '500px',padding:'20px'}">
           <router-view />
         </Content>
         <Footer class="layout-footer-center">power by guo</Footer>

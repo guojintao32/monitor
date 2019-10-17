@@ -18,8 +18,7 @@ app.use(async (ctx, next) => {
 });
 app.use(koaBody());
 router.get('/', async (ctx, next) => {
-    const indexPage = await IndexPage().catch(e=>console.log(e));
-    ctx.response.body = indexPage;
+    ctx.response.body = '连接后台成功~！';
 });
 router.get('/testadd', async (ctx, next) => {
     let name = '123123123'
@@ -29,19 +28,38 @@ router.get('/testadd', async (ctx, next) => {
     testModel.add({ name});
     ctx.response.body = '<h1>testadd</h1>';
 });
+router.get('/testfind', async (ctx, next) => {
+    const res = await testModel.find();
+    ctx.response.body = '<h1>testfind</h1>';
+});
 //从数据库获取所有错误列表
 router.get('/incorrect/list',async(ctx)=>{
     const res = await incorrectModal.find(ctx.query);
     ctx.response.body = res;
 })
-router.get('/testfind', async (ctx, next) => {
-    const res = await testModel.find();
-    ctx.response.body = '<h1>testfind</h1>';
-});
+//从数据库获取数量
+const moment = require('moment');
+router.get('/getCount/chart',async(ctx)=>{
+    const res = await incorrectModal.find({'form':'unhandledrejection'});
+    const type = ctx.request.query.type || '';
+    let dateCount = {};
+    for(let item of res){
+        let dateKey = moment(item.time).format('YYYY-MM-DD');
+        if(!dateCount[dateKey]){
+            dateCount[dateKey] = 1;
+        }
+        else{
+            dateCount[dateKey]++;
+        }
+    }
+    ctx.response.body = dateCount;
+})
+//删除错误
 router.get('/remove', async (ctx, next) => {
     const res = await testModel.remove();
     ctx.response.body = '<h1>remove</h1>';
 });
+//提交错误
 router.post('/report', async (ctx, next) => {
     var type = ctx.request.body.type || '';
     const res = await incorrectModal.add(ctx.request.body)
