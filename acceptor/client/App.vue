@@ -7,13 +7,19 @@
             <div class="layout-logo"></div>
             <div class="layout-nav">
               <MenuItem name="/">
-                <Icon type="ios-navigate"></Icon>Home
+                <Icon type="md-home"></Icon>首页
               </MenuItem>
-              <MenuItem name="/about">
-                <Icon type="ios-keypad"></Icon> About
-              </MenuItem>
+              
+              <Submenu name="4">
+                <template slot="title">
+                 <Icon type="md-bug"></Icon>错误统计
+                </template>
+                  <MenuItem name="/jsError">js错误统计</MenuItem>
+                  <MenuItem name="/httpError">接口错误统计</MenuItem>
+                  <MenuItem name="/resourceError">资源错误统计</MenuItem>              
+              </Submenu>
               <MenuItem name="3">
-                <Icon type="ios-analytics"></Icon>Item 3
+                <Icon type="ios-analytics"></Icon>性能分析(开发中)
               </MenuItem>
             </div>
           </Menu>
@@ -28,7 +34,7 @@
 </template>
 
 <script>
-import router from './router'
+import router from "./router";
 export default {
   data() {
     return {
@@ -36,8 +42,9 @@ export default {
     };
   },
   methods: {
-    route:function(name){
-      router.push(name)
+    route: function(name) {
+      console.log(name)
+      router.push(name);
     }
   }
 };

@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './page/home.vue'
-import About from './page/about.vue'
-
+import jsError from './page/jsError.vue';
+import httpError from './page/httpError.vue';
+import resourceError from './page/resourceError.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -14,9 +15,19 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path:'/jsError',
+      name:'jsError',
+      component:jsError
     },
+    {
+      path:'/httpError',
+      name:'httpError',
+      component:httpError
+    },
+    {
+      path:'/resourceError',
+      name:'resourceError',
+      component:resourceError
+    }
   ]
 })

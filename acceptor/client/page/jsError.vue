@@ -1,6 +1,6 @@
   
 <template>
-    <div>ABOUT</div>
+    <div>JS Error</div>
 </template>
 
 <script>
