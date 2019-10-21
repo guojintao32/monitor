@@ -8,8 +8,13 @@
     //js报错
     global.onerror = function (msg, url, row, col, error) {
         console.log('onerror 我知道错误了');
-        console.log({
-            msg, url, row, col, error
+        this.request(repUrl,{
+            body:JSON.stringify({
+                ...this.defaultParam(),
+                form:'onerror',
+                type:'scriptError',
+                reason:msg
+            })
         })
         return true;
     };
@@ -20,7 +25,7 @@
             body: JSON.stringify({
                 ...defaultParam(),
                 form: 'unhandledrejection',
-                type: 'promise',
+                type: 'scriptError',//'promise',
                 reason: typeof e.reason === 'object' ? e.reason.message : e.reason,
             })
         })
@@ -29,6 +34,7 @@
     //资源异常监听
     global.addEventListener('error', (msg) => {
         if (msg.target.nodeName) {//这里只处理资源异常
+            return
             request(repUrl, {
                 body: JSON.stringify({
                     ...defaultParam(),

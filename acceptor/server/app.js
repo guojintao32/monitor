@@ -40,8 +40,12 @@ router.get('/incorrect/list',async(ctx)=>{
 //从数据库获取数量
 const moment = require('moment');
 router.get('/getCount/chart',async(ctx)=>{
-    const res = await incorrectModal.find({'form':'unhandledrejection'});
     const type = ctx.request.query.type || '';
+    let serachPram = '';
+    if(type === 'js'){
+        serachPram = {'type':'scriptError'};
+    }
+    const res = await incorrectModal.find(serachPram);
     let dateCount = {};
     for(let item of res){
         let dateKey = moment(item.time).format('YYYY-MM-DD');
@@ -53,6 +57,15 @@ router.get('/getCount/chart',async(ctx)=>{
         }
     }
     ctx.response.body = dateCount;
+})
+//根据来源从数据库获取报错信息
+router.get('/getList',async(ctx)=>{
+    const type = ctx.request.query.type || '';
+    let serachPram = '';
+    if(type === 'js'){
+        serachPram = {'type':'scriptError'};
+    }
+    ctx.response.body = await incorrectModal.find(serachPram);
 })
 //删除错误
 router.get('/remove', async (ctx, next) => {
