@@ -21,6 +21,7 @@
     //promise报错
     global.addEventListener("unhandledrejection", function (e) {
         e.preventDefault()
+        return
         request(repUrl, {
             body: JSON.stringify({
                 ...defaultParam(),
