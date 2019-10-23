@@ -8,7 +8,7 @@ const incorrectSchema = new mongoose.Schema({
   href:String,
   type:String,
   reason:String,
-  form:String,
+  from:String,
 });
 
 const IncorrectCol = mongoose.model('incorrects',incorrectSchema);

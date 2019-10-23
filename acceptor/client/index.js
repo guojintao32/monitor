@@ -8,11 +8,13 @@ import 'view-design/dist/styles/iview.css';
 //v-charts
 import VeHistogram from 'v-charts/lib/histogram.common';
 import VeMap from 'v-charts/lib/map.common';
+import moment from 'moment';
 
 [VeHistogram, VeMap].forEach(comp => {
   Vue.component(comp.name, comp);
 });
 Vue.prototype.$axios = http;
+Vue.prototype.$moment = moment;
 Vue.config.productionTip = false
 Vue.use(ViewUI);
 

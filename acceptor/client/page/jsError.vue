@@ -4,9 +4,12 @@
     <h2>js错误数量统计</h2>
     <ve-histogram :data="chartData"></ve-histogram>
     <List header="Header" footer="Footer" border size="small">
-            <ListItem v-for="item in jsErrorList">{{item.reason}}</ListItem>
-            <ListItem>This is a piece of text.</ListItem>
-            <ListItem>This is a piece of text.</ListItem>
+            <ListItem v-for="item in jsErrorList">
+              {{item.reason}}
+              <span style="margin-left:10px">
+              时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}
+              </span>
+            </ListItem>
         </List>
   </div>
   

@@ -11,7 +11,7 @@
         this.request(repUrl,{
             body:JSON.stringify({
                 ...this.defaultParam(),
-                form:'onerror',
+                from:'onerror',
                 type:'scriptError',
                 reason:msg
             })
@@ -21,11 +21,10 @@
     //promise报错
     global.addEventListener("unhandledrejection", function (e) {
         e.preventDefault()
-        return
         request(repUrl, {
             body: JSON.stringify({
                 ...defaultParam(),
-                form: 'unhandledrejection',
+                from: 'unhandledrejection',
                 type: 'scriptError',//'promise',
                 reason: typeof e.reason === 'object' ? e.reason.message : e.reason,
             })
@@ -35,11 +34,10 @@
     //资源异常监听
     global.addEventListener('error', (msg) => {
         if (msg.target.nodeName) {//这里只处理资源异常
-            return
             request(repUrl, {
                 body: JSON.stringify({
                     ...defaultParam(),
-                    form: 'error',
+                    from: 'error',
                     type: msg.target.nodeName,
                     reason:document.HTMLDOMtoString(msg.target),
                 })
