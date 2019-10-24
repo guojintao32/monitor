@@ -2,20 +2,7 @@
 <template>
   <div>
     Http error
-    <ve-histogram :data="chartData"></ve-histogram>
-    <List header="Header" footer="Footer" border size="small">
-      <ListItem v-for="item in httpErrorList">
-        <ListItemMeta
-          :title='item.type'
-          :description='item.reason'
-        />
-        <template slot="action">
-          <li>
-            时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}
-          </li>
-        </template>
-      </ListItem>
-    </List>
+    
   </div>
 </template>
 

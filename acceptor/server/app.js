@@ -50,8 +50,8 @@ function getSearchparamFromType(type){
 //从数据库获取数量
 const moment = require('moment');
 router.get('/getCount/chart',async(ctx)=>{
-    const type = ctx.request.query.type || '';
-    const res = await incorrectModal.find(getSearchparamFromType(type));
+    const query = ctx.request.query;
+    const res = await incorrectModal.find(getSearchparamFromType(query.type));
     let dateCount = {};
     for(let item of res){
         let dateKey = moment(item.time).format('YYYY-MM-DD');
@@ -66,8 +66,15 @@ router.get('/getCount/chart',async(ctx)=>{
 })
 //根据来源从数据库获取报错信息
 router.get('/getList',async(ctx)=>{
-    const type = ctx.request.query.type || '';
-    ctx.response.body = await incorrectModal.find(getSearchparamFromType(type));
+    const query = ctx.request.query;
+    let findParam = getSearchparamFromType(query.type);
+    if(query.startTime){
+        findParam.time={
+            $lte:query.endTime,
+            $gte:query.startTime
+        }
+    }
+    ctx.response.body = await incorrectModal.find(findParam);
 })
 //删除错误
 router.get('/remove', async (ctx, next) => {
