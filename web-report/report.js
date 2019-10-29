@@ -33,7 +33,7 @@
     });
     //资源异常监听
     global.addEventListener('error', (msg) => {
-        if (msg.target.nodeName) {//这里只处理资源异常
+        if (!(msg instanceof ErrorEvent)) {//这里只处理资源异常
             request(repUrl, {
                 body: JSON.stringify({
                     ...defaultParam(),
