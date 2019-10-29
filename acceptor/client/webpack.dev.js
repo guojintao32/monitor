@@ -1,6 +1,7 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 console.log(process.env.NODE_ENV)
 module.exports = {
   entry: './client/index.js',
@@ -42,7 +43,8 @@ module.exports = {
       title: "vue_stage",
       template: path.resolve(__dirname,'./index.html')
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) })
   ],
   devServer: {
     contentBase: './dist',
