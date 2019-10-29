@@ -1,6 +1,7 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+console.log(process.env.NODE_ENV)
 module.exports = {
   entry: './client/index.js',
   output: {
@@ -50,6 +51,12 @@ module.exports = {
       rewrites: [
         { from: /^\/$/, to: '/dist/index.html' }
       ]
+    },
+    proxy:{
+      '/api': {
+        target: `http://localhost:8081`,
+        pathRewrite: {"^/api" : ""}
+      }
     }
   }
 } 

@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel client start",
-    "start": "node ./server/index.js",
+    "dev": "npm-run-all --parallel client server",
+    "prd": "npm-run-all --parallel client:prd server",
+    "server": "node ./server/index.js",
     "client": "webpack-dev-server --host 0.0.0.0 --config ./client/webpack.dev.js",
+    "client:prd": "cross-env NODE_ENV=production webpack-dev-server --host 0.0.0.0 --config ./client/webpack.dev.js",
     "build:client": "webpack --config ./client/webpack.dev.js"
   },
   "author": "guo",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
+    "cross-env": "^6.0.3",
     "echarts": "^4.4.0",
     "koa": "^2.8.2",
     "koa-bodyparser": "^4.2.1",

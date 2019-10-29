@@ -48,7 +48,7 @@ export default {
       this.getErrorList({startTime:startTime.valueOf(),endTime:endTime.valueOf()});
     },
     getErrorList(params){
-      this.$axios("http://localhost:8081/getList", {
+      this.$axios("/getList", {
       params: { type: "js" ,...params}
     }).then(res => {
       this.jsErrorList = res.data;
@@ -56,7 +56,7 @@ export default {
     }
   },
   mounted: function() {
-    this.$axios("http://localhost:8081/getCount/chart", {
+    this.$axios("/getCount/chart", {
       params: { type: "js" }
     }).then(res => {
       let rows = [];
