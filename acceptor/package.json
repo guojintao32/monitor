@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npm-run-all --parallel client start",
     "start": "node ./server/index.js",
     "client": "webpack-dev-server --host 0.0.0.0 --config ./client/webpack.dev.js",
     "build:client": "webpack --config ./client/webpack.dev.js"
@@ -28,6 +29,7 @@
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "npm-run-all": "^4.1.5",
     "style-loader": "^1.0.0",
     "url-loader": "^2.2.0",
     "vue-loader": "^15.7.1",
