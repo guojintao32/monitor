@@ -44,7 +44,7 @@ const showStatus = (status) => {
 console.log(process.env.NODE_ENV)
 const service = axios.create({
   // 联调
-  baseURL: '/', //process.env.NODE_ENV === 'production' ? `http://47.98.118.170:8081` : '/'转发在webpackdevserver中处理,
+  baseURL: '/api', //process.env.NODE_ENV === 'production' ? `http://47.98.118.170:8081` : '/'转发在webpackdevserver中处理,
   headers: {
     get: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
