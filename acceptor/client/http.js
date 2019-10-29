@@ -44,7 +44,7 @@ const showStatus = (status) => {
 
 const service = axios.create({
   // 联调
-  baseURL: process.env.NODE_ENV === 'production' ? `/` : '/apis',
+  baseURL: 'http://47.98.118.170:8081',
   headers: {
     get: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
