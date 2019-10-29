@@ -7,7 +7,7 @@
     "dev": "npm-run-all --parallel client server",
     "prd": "npm-run-all --parallel client:prd server",
     "server": "node ./server/index.js",
-    "client": "cross-env NODE_ENV=production webpack-dev-server --config ./client/webpack.dev.js",
+    "client": "cross-env NODE_ENV=development webpack-dev-server --config ./client/webpack.dev.js",
     "client:prd": "cross-env NODE_ENV=production webpack-dev-server --host 0.0.0.0 --config ./client/webpack.dev.js",
     "build:client": "cross-env NODE_ENV=production webpack --config ./client/webpack.dev.js"
   },
