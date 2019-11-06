@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted: function() {
-    this.$axios("http://localhost:8081/getCount/chart", {
+    this.$axios("/getCount/chart", {
       params: { type: "resource" }
     }).then(res => {
       let rows = [];
@@ -36,7 +36,7 @@ export default {
       }
       this.chartData.rows = rows;
     });
-    this.$axios("http://localhost:8081/getList", {
+    this.$axios("/getList", {
       params: { type: "resource" }
     }).then(res => {
       this.httpErrorList = res.data;

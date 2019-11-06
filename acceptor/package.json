@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-run-all --parallel client server",
-    "prd": "npm-run-all --parallel client:prd server",
-    "server": "node ./server/index.js",
+    "prd": "npm-run-all --parallel client:prd server:prd",
+    "server": "nodemon ./server/index.js",
+    "server:prd": "node ./server/index.js",
     "client": "cross-env NODE_ENV=development webpack-dev-server --config ./client/webpack.dev.js",
     "client:prd": "cross-env NODE_ENV=production webpack-dev-server --host 0.0.0.0 --config ./client/webpack.dev.js",
     "build:client": "cross-env NODE_ENV=production webpack --config ./client/webpack.dev.js"
@@ -32,6 +33,7 @@
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "nodemon": "^1.19.4",
     "npm-run-all": "^4.1.5",
     "style-loader": "^1.0.0",
     "url-loader": "^2.2.0",

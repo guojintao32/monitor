@@ -2,7 +2,7 @@
   <div>
     <div class="layout">
       <Layout>
-        <Header :style="{position: 'fixed', width: '100%'}">
+        <Header :style="{position: 'fixed', width: '100%',zIndex:1}">
           <Menu mode="horizontal" theme="dark" active-name="1" @on-select="route">
             <div class="layout-logo"></div>
             <div class="layout-nav">

@@ -18,7 +18,7 @@ app.use(async (ctx, next) => {
 });
 app.use(koaBody());
 router.get('/', async (ctx, next) => {
-    ctx.response.body = '连接后台成功~！';
+    ctx.response.body = '后台服务中~！';
 });
 router.get('/testadd', async (ctx, next) => {
     let name = '123123123'
@@ -44,6 +44,9 @@ function getSearchparamFromType(type){
     }
     else if(type === 'resource'){
         serachParam = {'from':'error'};
+    }
+    else if(type === 'api'){
+        serachParam = {'from':'http'};
     }
     return serachParam
 }

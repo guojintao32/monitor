@@ -4,7 +4,7 @@
     <ve-histogram 
   :data="chartData" 
   :events="chartEvents"
-  width='500px'></ve-histogram>
+  ></ve-histogram>
 </template>
 
 <script>
