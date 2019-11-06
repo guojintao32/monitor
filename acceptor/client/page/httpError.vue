@@ -2,32 +2,28 @@
 <template>
   <div>
     Http error
-    <Histogram :chartData="chartData"></Histogram>
-    <List header="资源请求失败列表" footer="Footer" border size="small">
-      <ListItem v-for="item in httpErrorList" v-bind:key="item._id">
-        <ListItemMeta :title="item.type" :description="item.reason" />
-        <template slot="action">
-          <li>时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}</li>
-        </template>
-      </ListItem>
-    </List>
+    <Histogram :chartData="chartData" @selectDate="selectDate"></Histogram>
+    <IncorrectList errorType="http" ref="childList"
+    listheader='资源请求失败列表'/>
   </div>
 </template>
 
 <script>
 import Histogram from "../component/Histogram.vue";
+import IncorrectList from '../component/IncorrectList.vue';
 export default {
   components: {
-    Histogram
+    Histogram,IncorrectList
   },
   data() {
     return {
-      chartData: {
-        columns: ["日期", "次数"],
-        rows: [{ 日期: "1/1", 次数: 1393 }]
-      },
-      httpErrorList: []
+      chartData: {columns: ["日期", "次数"],rows: []}
     };
+  },
+  methods:{
+    selectDate(p){
+      this.$refs.childList.selectDate(p)
+    },
   },
   mounted: function() {
     this.$axios("/getCount/chart", {
@@ -38,11 +34,6 @@ export default {
         rows.push({ 日期: key, 次数: res.data[key] });
       }
       this.chartData.rows = rows;
-    });
-    this.$axios("/getList", {
-      params: { type: "http" }
-    }).then(res => {
-      this.httpErrorList = res.data;
     });
   }
 };
