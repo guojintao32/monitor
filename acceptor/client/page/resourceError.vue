@@ -1,10 +1,10 @@
   
 <template>
   <div>
-    Http error
+    reasource error
     <Histogram :chartData="chartData"></Histogram>
     <List header="资源请求失败列表" footer="Footer" border size="small">
-      <ListItem v-for="item in httpErrorList">
+      <ListItem v-for="item in httpErrorList" v-bind:key="item._id">
         <ListItemMeta :title="item.type" :description="item.reason" />
         <template slot="action">
           <li>时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}</li>

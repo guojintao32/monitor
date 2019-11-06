@@ -2,12 +2,24 @@
 <template>
   <div>
     Http error
-    
+    <Histogram :chartData="chartData"></Histogram>
+    <List header="资源请求失败列表" footer="Footer" border size="small">
+      <ListItem v-for="item in httpErrorList" v-bind:key="item._id">
+        <ListItemMeta :title="item.type" :description="item.reason" />
+        <template slot="action">
+          <li>时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}</li>
+        </template>
+      </ListItem>
+    </List>
   </div>
 </template>
 
 <script>
+import Histogram from "../component/Histogram.vue";
 export default {
+  components: {
+    Histogram
+  },
   data() {
     return {
       chartData: {
@@ -19,7 +31,7 @@ export default {
   },
   mounted: function() {
     this.$axios("/getCount/chart", {
-      params: { type: "resource" }
+      params: { type: "http" }
     }).then(res => {
       let rows = [];
       for (let key in res.data) {
@@ -28,7 +40,7 @@ export default {
       this.chartData.rows = rows;
     });
     this.$axios("/getList", {
-      params: { type: "resource" }
+      params: { type: "http" }
     }).then(res => {
       this.httpErrorList = res.data;
     });

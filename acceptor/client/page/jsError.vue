@@ -12,7 +12,7 @@
       @on-change="handleChange"
     ></DatePicker>
     <List header="js报错列表" footer="Footer" border size="small">
-      <ListItem v-for="item in jsErrorList">
+      <ListItem v-for="item in jsErrorList" v-bind:key="item._id">
         <ListItemMeta :title="item.reason" />
         <template slot="action">
           <li>时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}</li>

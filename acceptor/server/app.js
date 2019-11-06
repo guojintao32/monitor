@@ -45,7 +45,7 @@ function getSearchparamFromType(type){
     else if(type === 'resource'){
         serachParam = {'from':'error'};
     }
-    else if(type === 'api'){
+    else if(type === 'http'){
         serachParam = {'from':'http'};
     }
     return serachParam
