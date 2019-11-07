@@ -32,11 +32,6 @@ router.get('/testfind', async (ctx, next) => {
     const res = await testModel.find();
     ctx.response.body = '<h1>testfind</h1>';
 });
-//从数据库获取所有错误列表
-router.get('/incorrect/list',async(ctx)=>{
-    const res = await incorrectModal.find(ctx.query);
-    ctx.response.body = res;
-})
 function getSearchparamFromType(type){
     let serachParam;
     if(type === 'js'){
@@ -50,6 +45,11 @@ function getSearchparamFromType(type){
     }
     return serachParam
 }
+//从数据库获取所有错误列表
+router.get('/incorrect/list',async(ctx)=>{
+    const res = await incorrectModal.find(ctx.query);
+    ctx.response.body = res;
+})
 //从数据库获取数量
 const moment = require('moment');
 router.get('/getCount/chart',async(ctx)=>{
@@ -80,13 +80,21 @@ router.get('/getList',async(ctx)=>{
     ctx.response.body = await incorrectModal.find(findParam);
 })
 //删除错误
-router.get('/remove', async (ctx, next) => {
+router.post('/removeAll', async (ctx, next) => {
     const res = await testModel.remove();
     ctx.response.body = '<h1>remove</h1>';
 });
+router.post('/remove',async(ctx,next)=>{
+    const _id = ctx.request.body._id;
+    const res = await incorrectModal.remove({_id}).catch(e=>{
+        ctx.response.body = e.message;
+    });
+    if(res){
+        ctx.response.body = '删除成功！';
+    }
+})
 //提交错误
 router.post('/report', async (ctx, next) => {
-    var type = ctx.request.body.type || '';
     const res = await incorrectModal.add(ctx.request.body)
     ctx.response.body = `提交成功！`;
 })

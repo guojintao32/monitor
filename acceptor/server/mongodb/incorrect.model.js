@@ -22,8 +22,8 @@ const incorrectModal = {
     });
     return result
   },
-  async find(query){
-    result = await new Promise(resolve => {
+  find(query){
+    return new Promise(resolve => {
       IncorrectCol.find(query, (err,data)=> {
         if (err) {
           logger.error(err)
@@ -31,15 +31,17 @@ const incorrectModal = {
         resolve(data)
       });
     });
-    return result
   },
-  async remove(query){
-    await IncorrectCol.remove(query, (err,data)=> {
-      console.log(data)
-      if (err) {
-        logger.error(err)
-      }
-    });
+  remove(query){
+    return new Promise((resolve,reject)=>{
+      IncorrectCol.remove(query, (err,data)=> {
+        if(err){
+          logger.error(err);
+          reject(err)
+        }
+        resolve(data)
+      })
+    })
   }
 }
 module.exports = incorrectModal;

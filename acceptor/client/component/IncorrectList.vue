@@ -13,6 +13,9 @@
         <ListItemMeta :title="item.reason" />
         <template slot="action">
           <li>时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}</li>
+          <li @click='deleteItem(item._id)'>
+            删除
+          </li>
         </template>
       </ListItem>
     </List>
@@ -45,6 +48,9 @@ export default {
     }).then(res => {
       this.errorList = res.data;
     });
+    },
+    deleteItem(_id){
+      this.$axios.post("/remove",{_id})
     }
   },
   mounted:function(){
