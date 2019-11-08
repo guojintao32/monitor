@@ -8,7 +8,7 @@
       :value="selectDateList"
       @on-change="handleChange"
     ></DatePicker>
-    <List :header="listheader" footer="Footer" border size="small">
+    <List :header="listheader" border size="small">
       <ListItem v-for="item in errorList" v-bind:key="item._id">
         <ListItemMeta :title="item.reason" />
         <template slot="action">
@@ -19,6 +19,10 @@
         </template>
       </ListItem>
     </List>
+    <Page :total="total" :page-size='pageSize' 
+    @on-change='pageChange'
+    @on-page-size-change='pageSizeChange'
+    show-sizer />
   </div>
 </template>
 <script>
@@ -27,7 +31,9 @@ export default {
   data() {
     return {
       errorList: [],
-      selectDateList:[]
+      selectDateList:[],
+      total:0,
+      pageSize:10,
     };
   },
   methods:{
@@ -45,9 +51,18 @@ export default {
     getErrorList(params){
       this.$axios("/getList", {
       params: { type: this.errorType,...params}
-    }).then(res => {
-      this.errorList = res.data;
-    });
+      }).then(res => {
+      const responent = res.data.body;
+      this.errorList = responent.list;
+      this.total =responent.pageInfo.total;
+      this.pageSize = responent.pageInfo.pageSize;
+      });
+    },
+    pageChange(pageNum){
+      this.getErrorList({pageNum,pageSize:this.pageSize})
+    },
+    pageSizeChange(pageSize){
+      this.getErrorList({pageNum:1,pageSize})
     },
     deleteItem(_id){
       this.$axios.post("/remove",{_id})

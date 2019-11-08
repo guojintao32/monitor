@@ -54,9 +54,9 @@ router.get('/incorrect/list',async(ctx)=>{
 const moment = require('moment');
 router.get('/getCount/chart',async(ctx)=>{
     const query = ctx.request.query;
-    const res = await incorrectModal.find(getSearchparamFromType(query.type));
+    const {list} = await incorrectModal.find(getSearchparamFromType(query.type));
     let dateCount = {};
-    for(let item of res){
+    for(let item of list){
         let dateKey = moment(item.time).format('YYYY-MM-DD');
         if(!dateCount[dateKey]){
             dateCount[dateKey] = 1;
@@ -70,6 +70,8 @@ router.get('/getCount/chart',async(ctx)=>{
 //根据来源从数据库获取报错信息
 router.get('/getList',async(ctx)=>{
     const query = ctx.request.query;
+    query.pageNum = parseInt(query.pageNum) || 1;
+    query.pageSize = parseInt(query.pageSize) || 10;
     let findParam = getSearchparamFromType(query.type);
     if(query.startTime){
         findParam.time={
@@ -77,7 +79,20 @@ router.get('/getList',async(ctx)=>{
             $gte:query.startTime
         }
     }
-    ctx.response.body = await incorrectModal.find(findParam);
+    let options={};
+    options.limit = parseInt(query.pageSize);
+    options.skip = parseInt((query.pageNum-1)*query.pageSize);
+    const {list,total} = await incorrectModal.find(findParam,options);
+    ctx.response.body = {
+        body:{
+            list,
+            pageInfo:{
+                pageNum:query.pageNum,
+                pageSize:query.pageSize,
+                total
+            }
+        }
+    }
 })
 //删除错误
 router.post('/removeAll', async (ctx, next) => {

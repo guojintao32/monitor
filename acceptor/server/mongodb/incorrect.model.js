@@ -22,14 +22,17 @@ const incorrectModal = {
     });
     return result
   },
-  find(query){
+  find(query,options){
     return new Promise(resolve => {
-      IncorrectCol.find(query, (err,data)=> {
-        if (err) {
-          logger.error(err)
-        }
-        resolve(data)
-      });
+      IncorrectCol.count(query,(err,total)=>{
+        console.log(options)
+        IncorrectCol.find(query,null,options, (err,data)=> {
+          if (err) {
+            logger.error(err)
+          }
+          resolve({list:data,total})
+        });
+      })
     });
   },
   remove(query){
