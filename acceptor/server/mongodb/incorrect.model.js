@@ -42,7 +42,7 @@ const incorrectModal = {
         if (err) {
           logger.error(err)
         }
-        resolve({ list: data})
+        resolve(data)
       });
     });
   },

@@ -54,7 +54,7 @@ router.get('/incorrect/list',async(ctx)=>{
 const moment = require('moment');
 router.get('/getCount/chart',async(ctx)=>{
     const query = ctx.request.query;
-    const {list} = await incorrectModal.find(getSearchparamFromType(query.type));
+    const list = await incorrectModal.find(getSearchparamFromType(query.type));
     let dateCount = {};
     for(let item of list){
         let dateKey = moment(item.time).format('YYYY-MM-DD');
@@ -93,6 +93,12 @@ router.get('/getList',async(ctx)=>{
             }
         }
     }
+})
+//获取详情
+router.get('/getDetail',async(ctx)=>{
+    const query = ctx.request.query;
+    const list= await incorrectModal.find(query);
+    ctx.response.body = {body:list[0]}
 })
 //删除错误
 router.post('/removeAll', async (ctx, next) => {
