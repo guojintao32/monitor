@@ -13,62 +13,85 @@
         <ListItemMeta :title="item.reason" />
         <template slot="action">
           <li>时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}</li>
-          <li @click='deleteItem(item._id)'>
-            删除
+
+          <li @click="deleteItem(item._id)">删除</li>
+          <li>
+            <a :href="'/errorDetail?_id='+item._id" target="_blank">详情 ></a>
           </li>
         </template>
       </ListItem>
     </List>
-    <Page :total="total" :page-size='pageSize' 
-    @on-change='pageChange'
-    @on-page-size-change='pageSizeChange'
-    show-sizer />
+    <Page
+      :total="total"
+      :page-size="pageSize"
+      @on-change="pageChange"
+      @on-page-size-change="pageSizeChange"
+      show-sizer
+    />
   </div>
 </template>
 <script>
 export default {
-  props:['errorType','listheader'],
+  props: ["errorType", "listheader"],
   data() {
     return {
       errorList: [],
-      selectDateList:[],
-      total:0,
-      pageSize:10,
+      selectDateList: [],
+      total: 0,
+      pageSize: 10
     };
   },
-  methods:{
-    handleChange(value,type){
+  methods: {
+    handleChange(value, type) {
       this.selectDateList = value;
-      this.getErrorList({startTime:value[0]?this.$moment(value[0]).valueOf():"",endTime:value[1]?this.$moment(value[1]).valueOf():""});
-    },
-    selectDate(p){
-      let startTime = this.$moment(p).startOf('day');
-      let endTime = this.$moment(p).endOf('day');
-      this.$set(this.selectDateList,0,startTime.format('YYYY-MM-DD HH:mm:ss'));
-      this.$set(this.selectDateList,1,endTime.format('YYYY-MM-DD HH:mm:ss'));
-      this.getErrorList({startTime:startTime.valueOf(),endTime:endTime.valueOf()});
-    },
-    getErrorList(params){
-      this.$axios("/getList", {
-      params: { type: this.errorType,...params}
-      }).then(res => {
-      const responent = res.data.body;
-      this.errorList = responent.list;
-      this.total =responent.pageInfo.total;
-      this.pageSize = responent.pageInfo.pageSize;
+      this.getErrorList({
+        startTime: value[0] ? this.$moment(value[0]).valueOf() : "",
+        endTime: value[1] ? this.$moment(value[1]).valueOf() : ""
       });
     },
-    pageChange(pageNum){
-      this.getErrorList({pageNum,pageSize:this.pageSize})
+    selectDate(p) {
+      let startTime = this.$moment(p).startOf("day");
+      let endTime = this.$moment(p).endOf("day");
+      this.$set(
+        this.selectDateList,
+        0,
+        startTime.format("YYYY-MM-DD HH:mm:ss")
+      );
+      this.$set(this.selectDateList, 1, endTime.format("YYYY-MM-DD HH:mm:ss"));
+      this.getErrorList({
+        startTime: startTime.valueOf(),
+        endTime: endTime.valueOf()
+      });
     },
-    pageSizeChange(pageSize){
-      this.getErrorList({pageNum:1,pageSize})
+    getErrorList(params) {
+      this.$axios("/getList", {
+        params: { type: this.errorType, ...params }
+      }).then(res => {
+        const responent = res.data.body;
+        this.errorList = responent.list;
+        this.total = responent.pageInfo.total;
+        this.pageSize = responent.pageInfo.pageSize;
+      });
     },
-    deleteItem(_id){
-      this.$axios.post("/remove",{_id})
+    pageChange(pageNum) {
+      this.getErrorList({ pageNum, pageSize: this.pageSize });
+    },
+    pageSizeChange(pageSize) {
+      this.getErrorList({ pageNum: 1, pageSize });
+    },
+    deleteItem(_id) {
+      this.$Modal.confirm({
+        title: "是否确认删除？",
+        onOk: () => {
+          this.$axios.post("/remove", { _id });
+        },
+        onCancel: () => {
+          this.$Message.info("取消删除");
+        }
+      });
     }
   },
-  mounted:function(){
+  mounted: function() {
     this.getErrorList();
   }
 };

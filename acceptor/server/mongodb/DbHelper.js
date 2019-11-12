@@ -1,5 +1,6 @@
 //import mongoose from 'mongoose';
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 let connectTimeOut;
  const DbHelper = {
   connectTimes: 8,
@@ -37,5 +38,5 @@ let connectTimeOut;
     });
   }
 }
-module.exports = DbHelper;
+module.exports = {DbHelper,ObjectId};
 //export default DbHelper;

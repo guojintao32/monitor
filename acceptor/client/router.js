@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './page/home.vue'
+import Detail from './page/detail.vue'
 import jsError from './page/jsError.vue';
 import httpError from './page/httpError.vue';
 import resourceError from './page/resourceError.vue';
@@ -28,6 +29,10 @@ export default new Router({
       path:'/resourceError',
       name:'resourceError',
       component:resourceError
+    },{
+      path:'/errorDetail',
+      name:'errorDetail',
+      component:Detail
     }
   ]
 })

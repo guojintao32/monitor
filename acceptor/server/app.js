@@ -82,7 +82,7 @@ router.get('/getList',async(ctx)=>{
     let options={};
     options.limit = parseInt(query.pageSize);
     options.skip = parseInt((query.pageNum-1)*query.pageSize);
-    const {list,total} = await incorrectModal.find(findParam,options);
+    const [list,total] = await Promise.all([incorrectModal.find(findParam,options),incorrectModal.count(findParam)]);
     ctx.response.body = {
         body:{
             list,

@@ -1,5 +1,5 @@
 //import DbHelper from './dbHelper';
-const DbHelper = require('./DbHelper')
+const {DbHelper} = require('./DbHelper')
 var log4js = require('log4js');
 var logger = log4js.getLogger();
 const mongoose = DbHelper.connect();
