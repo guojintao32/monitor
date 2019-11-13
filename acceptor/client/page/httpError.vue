@@ -4,7 +4,7 @@
     Http error
     <Histogram :chartData="chartData" @selectDate="selectDate"></Histogram>
     <IncorrectList errorType="http" ref="childList"
-    listheader='资源请求失败列表'/>
+    listheader='接口报错列表'/>
   </div>
 </template>
 
