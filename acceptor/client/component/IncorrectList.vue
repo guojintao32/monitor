@@ -10,11 +10,10 @@
     ></DatePicker>
     <List :header="listheader" border size="small">
       <ListItem v-for="item in errorList" v-bind:key="item._id">
-        <ListItemMeta :title="item.reason" />
+        <ListItemMeta :title="item._id" />
         <template slot="action">
-          <li>时间：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}</li>
-
-          <li @click="deleteItem(item._id)">删除</li>
+          <li>次数：{{item.times}}</li>
+          <li>最近：{{$moment(item.time).format('YYYY-MM-DD HH:mm:ss')}}</li>
           <li>
             <a :href="'/errorDetail?_id='+item._id" target="_blank">详情 ></a>
           </li>

@@ -38,10 +38,10 @@ function getSearchparamFromType(type){
         serachParam = {'type':'scriptError'};
     }
     else if(type === 'resource'){
-        serachParam = {'from':'error'};
+        serachParam = {'type':'reasourceError'}
     }
     else if(type === 'http'){
-        serachParam = {'from':'http'};
+        serachParam = {'type':'httpError'}
     }
     return serachParam
 }
@@ -79,10 +79,13 @@ router.get('/getList',async(ctx)=>{
             $gte:query.startTime
         }
     }
-    let options={};
-    options.limit = parseInt(query.pageSize);
-    options.skip = parseInt((query.pageNum-1)*query.pageSize);
-    const [list,total] = await Promise.all([incorrectModal.find(findParam,options),incorrectModal.count(findParam)]);
+    const [list,total] = await Promise.all([
+        incorrectModal.aggregate([
+            { $group: { _id: "$reason", times: { $sum: 1 }, last_time: { $max: "$time" }, type: { $first: "$type" } } },
+            { $match: findParam },
+            {$sort:{last_time:-1}},{$skip:parseInt((query.pageNum-1)*query.pageSize)},{$limit:parseInt(query.pageSize)},
+        ]),
+        incorrectModal.count(findParam)]);
     ctx.response.body = {
         body:{
             list,

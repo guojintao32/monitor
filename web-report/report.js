@@ -38,7 +38,8 @@
                 body: JSON.stringify({
                     ...defaultParam(),
                     from: 'error',
-                    type: msg.target.nodeName,
+                    type:'reasourceError',
+                    node:msg.target.nodeName,
                     reason:document.HTMLDOMtoString(msg.target),
                 })
             })

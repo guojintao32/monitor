@@ -56,6 +56,18 @@ const incorrectModal = {
         resolve(data)
       })
     })
+  },
+  aggregate(query) {
+    return new Promise((resolve, reject) => {
+      IncorrectCol.aggregate(query,
+        (err, data) => {
+          if (err) {
+            logger.error(err);
+            reject(err)
+          }
+          resolve(data)
+        })
+    })
   }
 }
 module.exports = incorrectModal;
