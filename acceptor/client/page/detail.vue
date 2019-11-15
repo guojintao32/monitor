@@ -30,7 +30,7 @@ export default {
   },
   mounted() {
     this.$axios("/getDetail", {
-      params: { _id: location.href.split("_id=")[1] }
+      params: { _id: unescape(location.href.split("_id=")[1]) }
     }).then(res => {
       this.detail = res.data.body;
     });

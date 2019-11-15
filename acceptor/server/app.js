@@ -79,6 +79,7 @@ router.get('/getList',async(ctx)=>{
             $gte:query.startTime
         }
     }
+    //当sort,skip,limit一起使用时，无论其位置变化，总是先sort再skip，最后limit。
     const [list,total] = await Promise.all([
         incorrectModal.aggregate([
             { $group: { _id: "$reason", times: { $sum: 1 }, last_time: { $max: "$time" }, type: { $first: "$type" } } },
@@ -100,8 +101,8 @@ router.get('/getList',async(ctx)=>{
 //获取详情
 router.get('/getDetail',async(ctx)=>{
     const query = ctx.request.query;
-    const list= await incorrectModal.find(query);
-    ctx.response.body = {body:list[0]}
+    //const list= await incorrectModal.find(query);
+    ctx.response.body = {body:query}
 })
 //删除错误
 router.post('/removeAll', async (ctx, next) => {

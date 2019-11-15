@@ -65,3 +65,10 @@ function defaultParam() {
         href: window.location.href
     }
 }
+// body: JSON.stringify({
+//     ...defaultParam(),
+//     from: 'http',
+//     type: 'httpError',
+//     status,
+//     reason: codeMessage[status],
+//   })
