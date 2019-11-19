@@ -24,13 +24,14 @@ const incorrectModal = {
   },
   count(query) {
     return new Promise((resolve, reject) => {
-      IncorrectCol.count(query, (err, total) => {
-        if (err) {
-          logger.error(err);
-          reject(err);
-        }
-        resolve(total)
-      })
+      IncorrectCol.aggregate(query,
+        (err, data) => {
+          if (err) {
+            logger.error(err);
+            reject(err)
+          }
+          resolve(data.length)
+        })
     })
   },
   find(query, options) {

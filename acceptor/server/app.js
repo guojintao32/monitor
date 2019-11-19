@@ -86,7 +86,9 @@ router.get('/getList',async(ctx)=>{
             { $match: findParam },
             {$sort:{last_time:-1}},{$skip:parseInt((query.pageNum-1)*query.pageSize)},{$limit:parseInt(query.pageSize)},
         ]),
-        incorrectModal.count(findParam)]);
+        incorrectModal.count([
+            { $group: { _id: "$reason", times: { $sum: 1 }, last_time: { $max: "$time" }, type: { $first: "$type" } } },
+            { $match: findParam }])]);
     ctx.response.body = {
         body:{
             list,
