@@ -22,7 +22,7 @@ const incorrectModal = {
     });
     return result
   },
-  count(query) {
+  aggregateCount(query) {
     return new Promise((resolve, reject) => {
       IncorrectCol.aggregate(query,
         (err, data) => {
@@ -32,6 +32,17 @@ const incorrectModal = {
           }
           resolve(data.length)
         })
+    })
+  },
+  count(query) {
+    return new Promise((resolve, reject) => {
+      IncorrectCol.count(query, (err, total) => {
+        if (err) {
+          logger.error(err);
+          reject(err);
+        }
+        resolve(total)
+      })
     })
   },
   find(query, options) {

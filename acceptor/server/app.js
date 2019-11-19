@@ -86,7 +86,7 @@ router.get('/getList',async(ctx)=>{
             { $match: findParam },
             {$sort:{last_time:-1}},{$skip:parseInt((query.pageNum-1)*query.pageSize)},{$limit:parseInt(query.pageSize)},
         ]),
-        incorrectModal.count([
+        incorrectModal.aggregateCount([
             { $group: { _id: "$reason", times: { $sum: 1 }, last_time: { $max: "$time" }, type: { $first: "$type" } } },
             { $match: findParam }])]);
     ctx.response.body = {
@@ -100,11 +100,25 @@ router.get('/getList',async(ctx)=>{
         }
     }
 })
-//获取详情
+//获取详情列表
 router.get('/getDetail',async(ctx)=>{
     const query = ctx.request.query;
-    //const list= await incorrectModal.find(query);
-    ctx.response.body = {body:query}
+    query.pageNum = parseInt(query.pageNum) || 1;
+    query.pageSize = parseInt(query.pageSize) || 10;
+    let options={};
+    options.limit = parseInt(query.pageSize);
+    options.skip = parseInt((query.pageNum-1)*query.pageSize);
+    const [list,total] = await Promise.all([incorrectModal.find({reason:query.reason},options),incorrectModal.count({reason:query.reason})])
+    ctx.response.body = {
+        body:{
+            list,
+            pageInfo:{
+                pageNum:query.pageNum,
+                pageSize:query.pageSize,
+                total
+            }
+        }
+    }
 })
 //删除错误
 router.post('/removeAll', async (ctx, next) => {
