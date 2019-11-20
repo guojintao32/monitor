@@ -15,7 +15,7 @@
           <li>次数：{{item.times}}</li>
           <li>最近：{{$moment(item.last_time).format('YYYY-MM-DD HH:mm:ss')}}</li>
           <li>
-            <a :href="'/errorDetail?_id='+item._id" target="_blank">详情 ></a>
+            <a :href="'/errorDetail?_id='+item._id+'&type='+errorType" target="_blank">详情 ></a>
           </li>
         </template>
       </ListItem>

@@ -15,7 +15,8 @@
 export default {
   data() {
     return {
-      reason: unescape(location.href.split("_id=")[1]),
+      reason: unescape(location.href.split("_id=")[1].split("&")[0]),
+      type: location.href.split("&type=")[1],
       columns1: [
         {
           title: "报错页面",
@@ -24,20 +25,29 @@ export default {
         {
           title: "报错时间",
           key: "time"
-        },{
-          title:"来自",
-          key:'from'
+        },
+        {
+          title: "来自",
+          key: "from"
         }
       ],
       errorList: []
     };
   },
+  created() {
+    if (this.type === "js") {
+      this.columns1.push({
+        title: "test",
+        key: "no"
+      });
+    }
+  },
   mounted() {
     this.$axios("/getDetail", {
       params: { reason: this.reason }
     }).then(res => {
-      for(let item of res.data.body.list){
-        item.time = this.$moment(item.time).format('YYYY-MM-DD HH:mm:ss')
+      for (let item of res.data.body.list) {
+        item.time = this.$moment(item.time).format("YYYY-MM-DD HH:mm:ss");
       }
       this.errorList = res.data.body.list;
     });

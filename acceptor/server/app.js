@@ -74,9 +74,9 @@ router.get('/getList',async(ctx)=>{
     query.pageSize = parseInt(query.pageSize) || 10;
     let findParam = getSearchparamFromType(query.type);
     if(query.startTime){
-        findParam.time={
-            $lte:query.endTime,
-            $gte:query.startTime
+        findParam.last_time={
+            $lte:parseInt(query.endTime),
+            $gte:parseInt(query.startTime)
         }
     }
     //当sort,skip,limit一起使用时，无论其位置变化，总是先sort再skip，最后limit。
@@ -136,7 +136,11 @@ router.post('/remove',async(ctx,next)=>{
 })
 //提交错误
 router.post('/report', async (ctx, next) => {
-    const res = await incorrectModal.add(ctx.request.body)
+    const userAgent = ctx.get("user-agent");
+    const res = await incorrectModal.add({
+        userAgent,
+        ...ctx.request.body
+    })
     ctx.response.body = `提交成功！`;
 })
 app.use(router.routes());

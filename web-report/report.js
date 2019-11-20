@@ -13,6 +13,8 @@
                 ...this.defaultParam(),
                 from:'onerror',
                 type:'scriptError',
+                fileName:url,
+                row,col,
                 reason:msg
             })
         })
@@ -53,11 +55,11 @@ function request(url, option) {
     option.headers = new Headers({
         'content-type': 'application/json'
     })
-    return fetch(url, option).then(response => {
-        return response.text();
-    }).catch(e => {
-        console.log(e)
-    })
+    // return fetch(url, option).then(response => {
+    //     return response.text();
+    // }).catch(e => {
+    //     console.log(e)
+    // })
 }
 function defaultParam() {
     return {
