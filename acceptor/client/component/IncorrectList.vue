@@ -15,7 +15,8 @@
           <li>次数：{{item.times}}</li>
           <li>最近：{{$moment(item.last_time).format('YYYY-MM-DD HH:mm:ss')}}</li>
           <li>
-            <a :href="'/errorDetail?_id='+item._id+'&type='+errorType" target="_blank">详情 ></a>
+            <a 
+            @click="handleDetail(item)">详情 ></a>
           </li>
         </template>
       </ListItem>
@@ -41,6 +42,10 @@ export default {
     };
   },
   methods: {
+    handleDetail(item){
+      const url = '/errorDetail'+'?_id='+encodeURI(item._id)+'&type='+this.errorType;
+      window.open(url)
+    },
     handleChange(value, type) {
       this.selectDateList = value;
       this.getErrorList({

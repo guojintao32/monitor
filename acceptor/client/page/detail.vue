@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      reason: unescape(location.href.split("_id=")[1].split("&")[0]),
+      reason: decodeURI(location.href.split("_id=")[1].split("&")[0]),
       type: location.href.split("&type=")[1],
       columns1: [
         {
@@ -27,7 +27,7 @@ export default {
           key: "time"
         },
         {
-          title: "来自",
+          title: "来自捕获",
           key: "from"
         }
       ],
@@ -35,11 +35,21 @@ export default {
     };
   },
   created() {
+    console.log(this.type)
     if (this.type === "js") {
-      this.columns1.push({
-        title: "test",
-        key: "no"
-      });
+      this.columns1 = this.columns1.concat([
+        {title: "报错文件",key: 'filename'},
+        {title:'行',key:'row'},
+        {title:'列',key:'col'},]);
+    }
+    else if(this.type === 'resource'){
+      this.columns1 = this.columns1.concat([
+        {title: "报错标签",key: 'node'}]);
+    }
+    else{
+      this.columns1 = this.columns1.concat([
+        {title: "报错接口",key: 'url'},
+        {title:'状态码',key:'status'}]);
     }
   },
   mounted() {

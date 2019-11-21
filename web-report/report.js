@@ -67,10 +67,13 @@ function defaultParam() {
         href: window.location.href
     }
 }
-// body: JSON.stringify({
-//     ...defaultParam(),
-//     from: 'http',
-//     type: 'httpError',
-//     status,
-//     reason: codeMessage[status],
+// request(repUrl, {
+//     body: JSON.stringify({
+//       ...defaultParam(),
+//       from: 'http',
+//       type: 'httpError',
+//       url,
+//       status,
+//       reason: codeMessage[status],
+//     })
 //   })
