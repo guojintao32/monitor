@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      reason: decodeURI(location.href.split("_id=")[1].split("&")[0]),
+      reason: decodeURIComponent(location.href.split("_id=")[1].split("&")[0]),
       type: location.href.split("&type=")[1],
       columns1: [
         {
