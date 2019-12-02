@@ -26,7 +26,7 @@ export default {
     },
   },
   mounted: function() {
-    this.$axios("/getCount/chart", {
+    this.$axios("/api/getCount/chart", {
       params: { type: "js" }
     }).then(res => {
       let rows = [];

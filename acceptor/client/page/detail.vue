@@ -53,7 +53,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios("/getDetail", {
+    this.$axios("/api/getDetail", {
       params: { reason: this.reason }
     }).then(res => {
       for (let item of res.data.body.list) {

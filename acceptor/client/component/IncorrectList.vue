@@ -69,7 +69,7 @@ export default {
       });
     },
     getErrorList(params) {
-      this.$axios("/getList", {
+      this.$axios("/api/getList", {
         params: { type: this.errorType, ...params }
       }).then(res => {
         const responent = res.data.body;

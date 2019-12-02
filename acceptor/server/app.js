@@ -5,7 +5,6 @@ const Koa = require('koa');
 const app = new Koa();
 const router = require('koa-router')();
 const koaBody = require('koa-bodyparser');
-const IndexPage = require('./page/index');
 app.use(async (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
