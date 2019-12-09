@@ -10,6 +10,8 @@
     "server:prd": "node ./server/index.js",
     "client": "cross-env NODE_ENV=development webpack-dev-server --config ./client/webpack.dev.js",
     "client:prd": "cross-env NODE_ENV=production webpack-dev-server --host 0.0.0.0 --config ./client/webpack.dev.js",
+    "clean":"rimraf ./client/dist && mkdir ./client/dist",
+    "prebuild:server": "npm run clean",
     "build:client": "cross-env NODE_ENV=production webpack --config ./client/webpack.dev.js"
   },
   "author": "guo",
