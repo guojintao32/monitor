@@ -41,7 +41,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "vue_stage",
-      template: path.resolve(__dirname,'./index.html')
+      template: path.resolve(__dirname,'./client/build/index.html'),
+      favicon: path.resolve(__dirname,'./client/build/favicon.ico'),
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) })

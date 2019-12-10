@@ -41,7 +41,7 @@ const showStatus = (status) => {
   }
   return `${message}，请检查网络或联系管理员！`
 }
-const service = axios.create({
+const request = axios.create({
   // 联调
  // baseURL: 'http://localhost:8081/' 转发在webpackdevserver中处理,
   headers: {
@@ -72,7 +72,7 @@ const service = axios.create({
 })
 
 // 请求拦截器
-service.interceptors.request.use((config) => {
+request.interceptors.request.use((config) => {
     return config
 }, (error) => {
     // 错误抛到业务代码
@@ -82,7 +82,7 @@ service.interceptors.request.use((config) => {
 })
 
 // 响应拦截器
-service.interceptors.response.use((response) => {
+request.interceptors.response.use((response) => {
     const status = response.status
     let msg = ''
     if (status < 200 || status >= 300) {
@@ -102,4 +102,4 @@ service.interceptors.response.use((response) => {
     return Promise.resolve(error)
 })
 
-export default service
+export default request
