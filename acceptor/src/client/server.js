@@ -21,7 +21,7 @@ router.get('*', async (ctx, next) => {
   }
   if(ctx.req.url.indexOf('api')<=0){
     ctx.response.body = await getFile(path.join(__dirname,'./dist',ctx.req.url));
-  }
+  } 
   else{
     next();
   }

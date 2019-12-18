@@ -38,7 +38,7 @@ export default {
     console.log(this.type)
     if (this.type === "js") {
       this.columns1 = this.columns1.concat([
-        {title: "报错文件",key: 'filename'},
+        {title: "报错文件",key: 'fileName'},
         {title:'行',key:'row'},
         {title:'列',key:'col'},]);
     }

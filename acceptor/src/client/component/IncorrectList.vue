@@ -44,7 +44,6 @@ export default {
   methods: {
     handleDetail(item){
       const url = '/errorDetail'+'?_id='+encodeURIComponent(item._id)+'&type='+this.errorType;
-      console.log(url);
       window.open(url)
     },
     handleChange(value, type) {

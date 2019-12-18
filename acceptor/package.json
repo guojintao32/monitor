@@ -8,7 +8,7 @@
     "prd": "npm-run-all --parallel client:prd server:prd",
     "server": "nodemon ./src/server/index.js",
     "server:prd": "node ./src/server/index.js",
-    "client": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.dev.js",
+    "client": "node ./src/client/server.js",
     "client:prd": "cross-env NODE_ENV=production webpack-dev-server --host 0.0.0.0 --config ./webpack.dev.js",
     "clean":"rimraf ./src/client/dist && mkdir ./src/client/dist",
     "prebuild:server": "npm run clean",

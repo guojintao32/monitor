@@ -9,6 +9,10 @@ const incorrectSchema = new mongoose.Schema({
   type: String,
   reason: String,
   from: String,
+  row:Number,
+  col:Number,
+  fileName:String,
+  status:Number
 });
 
 const IncorrectCol = mongoose.model('incorrects', incorrectSchema);
