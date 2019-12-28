@@ -43,7 +43,8 @@ const showStatus = (status) => {
 }
 const request = axios.create({
   // 联调
- // baseURL: 'http://localhost:8081/' 转发在webpackdevserver中处理,
+  baseURL: 'http://localhost:8081/', //转发在webpackdevserver中处理,
+  
   headers: {
     get: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -52,7 +53,7 @@ const request = axios.create({
       'Content-Type': 'application/json;charset=utf-8'
     }
   },
-  // 是否跨站点访问控制请求
+  // 是否跨站点访问控制请求fileName
   //withCredentials: true,
   timeout: 30000,
   transformRequest: [(data) => {

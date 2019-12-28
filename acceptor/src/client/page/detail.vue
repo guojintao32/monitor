@@ -7,7 +7,11 @@
       </p>
       <p>详情：{{reason}}</p>
     </Card>
-    <Table :columns="columns1" :data="errorList"></Table>
+    <Table :columns="columns1" :data="errorList">
+      <template slot-scope="{ row,index}" slot="action">
+          <Button type="primary" size="small" @click="detail(row)">查看详情</Button>
+      </template>
+    </Table>
   </div>
 </template>
 
@@ -40,7 +44,10 @@ export default {
       this.columns1 = this.columns1.concat([
         {title: "报错文件",key: 'fileName'},
         {title:'行',key:'row'},
-        {title:'列',key:'col'},]);
+        {title:'列',key:'col'},
+        {title:'操作',slot: 'action',
+                        width: 150,
+                        align: 'center'},]);
     }
     else if(this.type === 'resource'){
       this.columns1 = this.columns1.concat([
@@ -53,7 +60,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios("/api/getDetail", {
+    this.$axios("/getDetail", {
       params: { reason: this.reason }
     }).then(res => {
       for (let item of res.data.body.list) {
@@ -61,6 +68,15 @@ export default {
       }
       this.errorList = res.data.body.list;
     });
+  },
+  methods:{
+    detail(item){
+      this.$axios("/getDetailFromSourceMap", {
+      params: { fileName: item.fileName,row:item.row,col:item.col }
+    }).then(res => {
+      console.log(res)
+    });
+    }
   }
 };
 </script>

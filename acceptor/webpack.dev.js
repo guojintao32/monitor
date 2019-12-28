@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 console.log(process.env.NODE_ENV)
 module.exports = {
-  entry: './client/index.js',
+  entry: './src/client/index.js',
   output: {
     filename: 'app.js',
     path: path.resolve(__dirname,'./dist')
@@ -41,8 +41,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "vue_stage",
-      template: path.resolve(__dirname,'./client/build/index.html'),
-      favicon: path.resolve(__dirname,'./client/build/favicon.ico'),
+      template: path.resolve(__dirname,'./src/client/build/index.html'),
+      favicon: path.resolve(__dirname,'./src/client/build/favicon.ico'),
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) })
