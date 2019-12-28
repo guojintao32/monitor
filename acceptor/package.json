@@ -27,7 +27,7 @@
     "koa2-proxy-middleware": "0.0.4",
     "log4js": "^5.2.2",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.4",
+    "mongoose": "^5.7.5",
     "source-map": "^0.7.3",
     "v-charts": "^1.19.0",
     "view-design": "^4.0.1",
