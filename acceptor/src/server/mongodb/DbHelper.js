@@ -1,9 +1,10 @@
 //import mongoose from 'mongoose';
+const {connectTimes,mongodbUrl} = require('../config');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 let connectTimeOut;
  const DbHelper = {
-  connectTimes: 8,
+  connectTimes: connectTimes,
   connect() {
     DbHelper.mongooseConnect();
     const db = mongoose.connection;
@@ -31,7 +32,7 @@ let connectTimeOut;
     return mongoose;
   },
   mongooseConnect() {
-    mongoose.connect('mongodb://localhost/test', {
+    mongoose.connect(mongodbUrl, {
       useNewUrlParser: true,
       // 弃用警告 https://mongoosejs.com/docs/deprecations.html#-findandmodify-
       useFindAndModify: false

@@ -1,2 +1,3 @@
+const {host} = require('./config')
 const app = require('./app');
-app.listen('8081');
+app.listen(host);

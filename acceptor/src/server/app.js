@@ -8,6 +8,7 @@ const koaBody = require('koa-bodyparser');
 const fs = require('fs');
 const path = require('path');
 const SourceMap = require('source-map');
+const {sourceMapPath} = require('./config');
 const { readFileSync } = fs;
 app.use(async (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', '*');
@@ -133,7 +134,7 @@ router.get('/getDetailFromSourceMap', async (ctx) => {
         let rawSourceMap;
         const { SourceMapConsumer } = SourceMap;
         try {
-            rawSourceMap = JSON.parse(readFileSync(path.resolve(__dirname, '../../sourcemaps/7.7278d477.async.js.map'), 'utf8'))
+            rawSourceMap = JSON.parse(readFileSync(path.resolve(__dirname,sourceMapPath,fileName), 'utf8'))
         }
         catch (e) {
             rawSourceMap = null;

@@ -8,7 +8,7 @@
       <p>详情：{{reason}}</p>
     </Card>
     <Table :columns="columns1" :data="errorList">
-      <template slot-scope="{ row,index}" slot="action">
+      <template slot-scope="{ row}" slot="action">
           <Button type="primary" size="small" @click="detail(row)">查看详情</Button>
       </template>
     </Table>
@@ -45,9 +45,7 @@ export default {
         {title: "报错文件",key: 'fileName'},
         {title:'行',key:'row'},
         {title:'列',key:'col'},
-        {title:'操作',slot: 'action',
-                        width: 150,
-                        align: 'center'},]);
+        {title:'操作',slot: 'action',width: 150,align: 'center'},]);
     }
     else if(this.type === 'resource'){
       this.columns1 = this.columns1.concat([
