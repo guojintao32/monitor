@@ -12,7 +12,8 @@ const incorrectSchema = new mongoose.Schema({
   row:Number,
   col:Number,
   fileName:String,
-  status:Number
+  status:Number,
+  userAgent:String,
 });
 
 const IncorrectCol = mongoose.model('incorrects', incorrectSchema);

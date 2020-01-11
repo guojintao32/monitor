@@ -1,6 +1,7 @@
 //import testModel from './mongodb/model';
 const testModel = require('./mongodb/model');
 const incorrectModal = require('./mongodb/incorrect.model');
+const performanceModal = require('./mongodb/performance.model');
 const Koa = require('koa');
 const app = new Koa();
 const router = require('koa-router')();
@@ -175,6 +176,16 @@ router.post('/report', async (ctx, next) => {
         userAgent,
         ...ctx.request.body
     })
+    ctx.response.body = `提交成功！`;
+})
+//提交性能数据
+router.post('/performance',async(ctx)=>{
+    const userAgent = ctx.get('user-agent');
+    const res = await performanceModal.add({
+        userAgent,
+        ip:ctx.request.ip,
+        ...ctx.request.body
+    });
     ctx.response.body = `提交成功！`;
 })
 app.use(router.routes());
