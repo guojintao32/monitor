@@ -15,6 +15,8 @@ const performanceSchema = new mongoose.Schema({
   blankTime: Number,
   domReadyTime: Number,
   userAgent:String,
+  jsTime:Number,
+  cssTime:Number,
   ip:String
 });
 
