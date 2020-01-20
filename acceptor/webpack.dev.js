@@ -57,7 +57,7 @@ module.exports = {
     },
     proxy:{
       '/api': {
-        target: process.env.NODE_ENV=== 'development' ? 'http://localhost:8081' : 'http://47.98.118.170:8081',
+        target: process.env.NODE_ENV=== 'development' ? 'http://localhost:8088' : 'http://47.98.118.170:8088',
         pathRewrite: {'^/api' : ''},
         changeOrigin: true,
       }

@@ -1,5 +1,5 @@
 (function (global) {
-    const repUrl = 'http://localhost:8081/report';
+    const repUrl = 'http://localhost:8088/report';
     document.HTMLDOMtoString = function (HTMLDOM) {
         const div = document.createElement("div")
         div.appendChild(HTMLDOM)

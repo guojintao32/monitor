@@ -43,7 +43,7 @@ const showStatus = (status) => {
 }
 const request = axios.create({
   // 联调
-  baseURL: 'http://localhost:8081/', //转发在webpackdevserver中处理,
+  baseURL: 'http://localhost:8088/', //转发在webpackdevserver中处理,
   
   headers: {
     get: {
