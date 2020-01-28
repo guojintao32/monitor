@@ -18,7 +18,7 @@
                   <MenuItem name="/httpError">接口错误统计</MenuItem>
                   <MenuItem name="/resourceError">资源错误统计</MenuItem>              
               </Submenu>
-              <MenuItem name="3">
+              <MenuItem name="/performance">
                 <Icon type="ios-analytics"></Icon>性能分析(开发中)
               </MenuItem>
             </div>

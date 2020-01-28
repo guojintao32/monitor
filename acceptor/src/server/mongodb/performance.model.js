@@ -17,7 +17,8 @@ const performanceSchema = new mongoose.Schema({
   userAgent:String,
   jsTime:Number,
   cssTime:Number,
-  ip:String
+  ip:String,
+  time:Number
 });
 
 const performanceCol = mongoose.model('performance', performanceSchema);
@@ -27,9 +28,19 @@ const performanceModal = {
     const incorrectCol = new performanceCol(item);
     const result = await incorrectCol.save(err => {
       if (err) logger.error(err)
-      logger.info('数据保存成功！')
+      logger.info('performance数据保存成功！')
     });
     return result
+  },
+  findByCol(col, options) {
+    return new Promise(resolve => {
+      performanceCol.find({}, [col], options, (err, data) => {
+        if (err) {
+          logger.error(err)
+        }
+        resolve(data)
+      });
+    });
   },
   count(query) {
     return new Promise((resolve, reject) => {

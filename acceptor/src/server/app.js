@@ -183,10 +183,17 @@ router.post('/performance',async(ctx)=>{
     const userAgent = ctx.get('user-agent');
     const res = await performanceModal.add({
         userAgent,
+        time:new Date().getTime(),
         ip:ctx.request.ip,
         ...ctx.request.body
     });
     ctx.response.body = `提交成功！`;
+})
+//查询某一项性能指标
+router.get('/performance/getCol',async(ctx)=>{
+    const col = ctx.request.query.col;
+    const res = await performanceModal.findByCol(col);
+    ctx.response.body = res;
 })
 app.use(router.routes());
 

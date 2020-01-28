@@ -5,6 +5,7 @@ import Detail from './page/detail.vue'
 import jsError from './page/jsError.vue';
 import httpError from './page/httpError.vue';
 import resourceError from './page/resourceError.vue';
+import performance from './page/performance.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -33,6 +34,10 @@ export default new Router({
       path:'/errorDetail',
       name:'errorDetail',
       component:Detail
+    },{
+      path:'/performance',
+      name:'performance',
+      component:performance
     }
   ]
 })
