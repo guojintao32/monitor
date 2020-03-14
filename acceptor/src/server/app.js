@@ -174,6 +174,7 @@ router.post('/report', async (ctx, next) => {
     const userAgent = ctx.get("user-agent");
     const res = await incorrectModal.add({
         userAgent,
+        ip:ctx.request.ip,
         ...ctx.request.body
     })
     ctx.response.body = `提交成功！`;
