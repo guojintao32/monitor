@@ -18,7 +18,8 @@ const performanceSchema = new mongoose.Schema({
   jsTime:Number,
   cssTime:Number,
   ip:String,
-  time:Number
+  time:Number,
+  user:String
 });
 
 const performanceCol = mongoose.model('performance', performanceSchema);
