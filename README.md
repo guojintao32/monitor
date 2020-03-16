@@ -1,4 +1,22 @@
 # 前端监控平台
+
+监控并保存项目中的各种保存和性能数据，通过图表的形式展示出来。
+
+## Start
+
+```shell
+# change directory
+cd acceptor
+
+# install dependencies
+npm i
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build:client
+```
 ## 异常监控
 ![image](doc/异常监控.png)
 ## 性能监控
