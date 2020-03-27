@@ -51,7 +51,12 @@ stalled时间，及阻塞暂停时间，多发生在：
 
 ![image](doc/监控平台.png)
 
-
+## 运行截图
+![image](doc/run1.png)
+![image](doc/run2.png)
+![image](doc/run3.png)
+![image](doc/run4.png)
+![image](doc/run5.png)
 **待优化：**
 
 1.报错日志离线存储，在浏览器空闲时候上报
